@@ -1,0 +1,19 @@
+api:
+  client_id: # your client id
+  client_secret: # your client secret
+  redirect_url: # your client redirect url
+
+login:
+  enabled: false # enable to check followers and points (WIP, not working)
+
+main:
+  log_level: "debug" # log level
+  listen_port: 3000 # metrics listening port
+  config_dir: "."
+
+streamer:
+  list: # list of local followers
+    - nasa 
+
+scrape: # enable or disable scrape configs (WIP, not working)
+  viewers: true
