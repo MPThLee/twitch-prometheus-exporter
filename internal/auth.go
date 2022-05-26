@@ -107,8 +107,8 @@ func RequestAuthorize(twitch *helix.Client) (bool, error) {
 	var authcode string
 
 	url := twitch.GetAuthorizationURL(&helix.AuthorizationURLParams{
-		ResponseType: "code", // or "token"
-		Scopes:       []string{"user:read:email"},
+		ResponseType: "token",
+		Scopes:       []string{"user:read:email", ""},
 		State:        "some-state",
 		ForceVerify:  false,
 	})

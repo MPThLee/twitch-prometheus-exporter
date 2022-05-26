@@ -37,6 +37,8 @@ func main() {
 	errHandlerPanic(err)
 
 	if config.Login.Enabled {
+		logger.Fatal("Login doesn't supported at this time.")
+
 		res, err := internal.RequestAuthorize(client)
 		if err != nil || !res {
 			logger.Error(err)
