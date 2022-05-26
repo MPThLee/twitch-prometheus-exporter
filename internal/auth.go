@@ -42,6 +42,7 @@ func validateAndSetUserToken(twitch *helix.Client, token string) (bool, error) {
 		return false, err
 	}
 	twitch.SetUserAccessToken(token)
+	setUserTokenToFile(token)
 	return true, nil
 }
 

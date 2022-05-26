@@ -47,15 +47,21 @@ func LoadConfig(path string) RootConfig {
 	var logger = Log.Child("config").Child("loadConfig")
 	var k = koanf.New(".")
 
-	k.Load(structs.Provider(RootConfig{}, "koanf"), nil)
+	if err := k.Load(structs.Provider(RootConfig{}, "koanf"), nil); err != nil {
+		logger.Fatal("Unknown Fatal error Which should not happend.")
+		panic(err)
+	}
 
 	if err := k.Load(file.Provider(path), yaml.Parser()); err != nil {
-		logger.Fatalf("error loading config: ", err)
+		logger.Fatal("error loading config", err)
 		panic(err)
 	}
 
 	var out RootConfig
-	k.Unmarshal("", &out)
+	if err := k.Unmarshal("", &out); err != nil {
+		logger.Fatal("Config unmarchal error.", err)
+		panic(err)
+	}
 	return out
 }
 

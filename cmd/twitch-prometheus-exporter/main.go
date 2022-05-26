@@ -20,19 +20,26 @@ func main() {
 	internal.Log.SetLevel(config.Main.LogLevel)
 	c := gocron.NewScheduler(time.UTC)
 
+	errHandlerPanic := func(err error) {
+		if err != nil {
+			logger.Error(err)
+			panic(err)
+		}
+	}
+
 	client, err := helix.NewClient(&helix.Options{
 		ClientID:     config.API.ClientID,
 		ClientSecret: config.API.ClientSecret,
 	})
-	if err != nil {
-		panic(err)
-	}
+	errHandlerPanic(err)
 
-	internal.RequestAppToken(client)
+	_, err = internal.RequestAppToken(client)
+	errHandlerPanic(err)
 
 	if config.Login.Enabled {
 		res, err := internal.RequestAuthorize(client)
 		if err != nil || res == false {
+			logger.Error(err)
 			panic(err)
 		}
 

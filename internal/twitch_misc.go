@@ -19,6 +19,8 @@ func IsLoggedIn(twitch *helix.Client) bool {
 	return config.Login.Enabled
 }
 
+//TODO: use this for some user scope request
+//nolint: deadcode
 func getMyData(twitch *helix.Client) (*helix.User, error) {
 	if !IsLoggedIn(twitch) {
 		return nil, errors.New("Not logged in.")
@@ -94,10 +96,14 @@ func contains(s []helix.User, x helix.User) bool {
 
 func LoadFollowers(twitch *helix.Client) ([]helix.User, error) {
 	local, err := loadLocalFollows(twitch)
-	if err != err {
+	if err != nil {
 		return nil, err
 	}
+
 	remote, err := loadRemoteFollowers(twitch)
+	if err != nil {
+		return nil, err
+	}
 
 	var out = []helix.User{}
 
