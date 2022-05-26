@@ -32,6 +32,7 @@ type LoginConfig struct {
 type MainConfig struct {
 	LogLevel   string `koanf:"log_level"`
 	ListenPort int    `koanf:"listen_port"`
+	ConfigDir  string `koanf:"config_dir"`
 }
 
 type StreamerConfig struct {

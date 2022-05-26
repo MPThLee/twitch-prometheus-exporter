@@ -10,7 +10,7 @@ import (
 
 // totally bad design.
 
-var token_file = "access_token.secret"
+var token_file = config.Main.ConfigDir + "/access_token.secret"
 
 func auth_logger(child string) *golog.Logger {
 	return Log.Child("auth").Child(child)
@@ -42,8 +42,7 @@ func validateAndSetUserToken(twitch *helix.Client, token string) (bool, error) {
 		return false, err
 	}
 	twitch.SetUserAccessToken(token)
-	setUserTokenToFile(token)
-	return true, nil
+	return setUserTokenToFile(token)
 }
 
 func validateUserToken(twitch *helix.Client, token string) (bool, error) {
@@ -78,7 +77,7 @@ func setUserTokenToFile(token string) (bool, error) {
 		logger.Error("failed to save token to file", err)
 		return false, err
 	}
-	logger.Debug("read token file success.")
+	logger.Debug("write token file success.")
 	return true, nil
 }
 

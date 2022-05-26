@@ -20,7 +20,7 @@ func IsLoggedIn(twitch *helix.Client) bool {
 }
 
 //TODO: use this for some user scope request
-//nolint: deadcode
+//nolint: deadcode unused
 func getMyData(twitch *helix.Client) (*helix.User, error) {
 	if !IsLoggedIn(twitch) {
 		return nil, errors.New("Not logged in.")

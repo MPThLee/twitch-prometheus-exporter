@@ -38,15 +38,22 @@ func main() {
 
 	if config.Login.Enabled {
 		res, err := internal.RequestAuthorize(client)
-		if err != nil || res == false {
+		if err != nil || !res {
 			logger.Error(err)
 			panic(err)
 		}
 
-		internal.RefreshUserToken(client)
-		c.Every(1).Days().Do(func() {
-			internal.RefreshUserToken(client)
+		_, err = internal.RefreshUserToken(client)
+		errHandlerPanic(err)
+
+		_, err = c.Every(1).Days().Do(func() {
+			logger.Debug("refresh user token by cron.")
+			_, err := internal.RefreshUserToken(client)
+			if err != nil {
+				logger.Info("Failed to refresh token. Maybe network problem.")
+			}
 		})
+		errHandlerPanic(err)
 	}
 
 	appCollectors := internal.GetAppMetricsCollectors(client)
