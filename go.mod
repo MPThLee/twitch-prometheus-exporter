@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/go-co-op/gocron v1.13.0
 	github.com/kataras/golog v0.1.7
-	github.com/knadh/koanf v1.4.1
+	github.com/knadh/koanf v1.4.2
 	github.com/nicklaw5/helix v1.25.0
 	github.com/prometheus/client_golang v1.12.2
 )
@@ -29,6 +29,5 @@ require (
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	google.golang.org/protobuf v1.26.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0 // indirect
 )
