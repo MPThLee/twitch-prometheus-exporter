@@ -24,7 +24,7 @@ jobs:
         output=$(date -u '+%Y%m%d%H%M%S')
         echo ::set-output name=date_version::$output
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Login to DockerHub
       uses: docker/login-action@v2
